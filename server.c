@@ -101,7 +101,7 @@ void *worker_thread(void *arg)
     pthread_exit(NULL);
 }
 
-int main()
+int main(void)
 {
     /* Used for handling the interrupt signal. */
     struct sigaction act;
