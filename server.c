@@ -45,6 +45,7 @@ int main()
         if(strlen(str) <= 0)
         {
             printf("INVALID INPUT\n");
+            free(str);
             continue;
         }
 
