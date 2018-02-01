@@ -51,6 +51,25 @@ int main()
 
 void *worker_thread(void *arg)
 {
+    /* get filename passed in by main thread */
+    char * filename = (char *) arg;
 
-    return NULL;
+    /* detach thread so join is not needed */
+    pthread_detach(pthread_self());
+
+    if ((rand() % 10) < 8) {
+        /* 80% chance of happening */
+        sleep(1);
+    }else {
+        /* 20% chance of happening */
+        /* sleep 7 - 10 seconds */
+        sleep(rand() % 4 + 7);
+    }
+
+    printf("Accessed file %s", filename);
+
+    /* free memory allocated for filename */
+    free(filename);
+
+    pthread_exit(NULL);
 }
