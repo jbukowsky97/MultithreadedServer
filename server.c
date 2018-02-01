@@ -37,7 +37,16 @@ int main()
         /* Prompt the user for input. */
         printf("Please input a file name: ");
         /* Store the user input. */
-        scanf("%s", str);
+        fgets(str, MAX_NUM_INPUT_CHARS, stdin);
+        /* Remove newline character. */
+        str[strcspn(str, "\n")] = 0;
+
+        /* Check for invalid input. */
+        if(strlen(str) <= 0)
+        {
+            printf("INVALID INPUT\n");
+            continue;
+        }
 
         /* Spawn a worker thread with the user input. */
         if ((status = pthread_create(&latest_thread, NULL, worker_thread, str)) != 0) {
@@ -66,7 +75,7 @@ void *worker_thread(void *arg)
         sleep(rand() % 4 + 7);
     }
 
-    printf("Accessed file %s", filename);
+    printf("\nAccessed file: %s\n", filename);
 
     /* free memory allocated for filename */
     free(filename);
